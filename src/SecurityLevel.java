@@ -1,15 +1,5 @@
-public enum SecurityLevel {
-    PUBLIC(1),
-    RESTRICTED(2),
-    SECRET(3);
- 
-    private final int level;
- 
-    SecurityLevel(int level) {
-        this.level = level;
-    }
- 
-    public int getLevel() {
-        return level;
-    }
+public class SecurityLevel {
+    public static final int PUBLIC = 1;
+    public static final int RESTRICTED = 2;
+    public static final int SECRET = 3;
 }
