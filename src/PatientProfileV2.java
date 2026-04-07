@@ -42,7 +42,7 @@ public class PatientProfileV2 implements MedicalRecord, Versioned, Confidential 
 
     @Override
     public int getVersion() {
-        return 1;
+        return 2;
     }
 
     @Override
