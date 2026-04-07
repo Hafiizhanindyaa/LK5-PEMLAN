@@ -1,3 +1,5 @@
+package src;
+
 public class SecureResponse<T extends MedicalRecord & Confidential> {
 
     private boolean success;

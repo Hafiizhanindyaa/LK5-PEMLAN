@@ -1,3 +1,5 @@
+package src;
+
 public class MockDatabase {
 
     public static PatientProfileV1 getPatientV1() {

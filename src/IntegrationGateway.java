@@ -1,3 +1,5 @@
+package src;
+
 public class IntegrationGateway<T extends MedicalRecord & Versioned & Confidential> {
     
     private T mockDatabaseRecord;

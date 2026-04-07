@@ -1,3 +1,5 @@
+package src;
+
 public class PatientProfileV1 implements MedicalRecord, Versioned, Confidential {
 
     private String patientId;
