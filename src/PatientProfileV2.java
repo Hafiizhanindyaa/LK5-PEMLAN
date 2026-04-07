@@ -4,8 +4,8 @@ public class PatientProfileV2 implements MedicalRecord, Versioned, Confidential 
     private String name;
     private String ssn;          
     private int securityLevel;
-    private String diagnosis = "None";
-    private String medicalHistory = "None";
+    private String diagnosis;
+    private String medicalHistory;
 
     public PatientProfileV2(String patientId, String name, String ssn, int securityLevel, String diagnosis) {
         this.patientId = patientId;
@@ -13,6 +13,7 @@ public class PatientProfileV2 implements MedicalRecord, Versioned, Confidential 
         this.ssn = ssn;
         this.securityLevel = securityLevel;
         this.diagnosis = diagnosis;
+        this.medicalHistory = "None";
     }
     public PatientProfileV2(String patientId, String name, String ssn, String medicalHistory, int securityLevel) {
         this.patientId = patientId;
@@ -20,6 +21,7 @@ public class PatientProfileV2 implements MedicalRecord, Versioned, Confidential 
         this.ssn = ssn;
         this.securityLevel = securityLevel;
         this.medicalHistory = medicalHistory;
+        this.diagnosis = "None";
     }
     public PatientProfileV2(String patientId, String name, String ssn, int securityLevel,String diagnosis, String medicalHistory) {
         this.patientId = patientId;
@@ -71,7 +73,7 @@ public class PatientProfileV2 implements MedicalRecord, Versioned, Confidential 
 
     @Override
     public String toString() {
-        return "[V1] Patient ID : " + patientId +
+        return "[V2] Patient ID : " + patientId +
                "\n       Name            : " + name +
                "\n       KTP (SSN)       : " + ssn +
                "\n       Security        : " + securityLevel +
