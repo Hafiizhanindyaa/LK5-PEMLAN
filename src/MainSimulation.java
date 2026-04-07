@@ -2,7 +2,7 @@ public class MainSimulation {
 
     public static void main(String[] args) {
 
-        System.out.println("\n=== LEVEL 1 (TIDAK DIMASK) ===");
+        System.out.println("\n=== CASE 1: DATA PUBLIC (TIDAK DIMASK) ===");
 
         PatientProfileV1 publicPatient = new PatientProfileV1(
                 "P003",
@@ -19,32 +19,41 @@ public class MainSimulation {
         );
 
 
-        System.out.println("\n=== LEVEL 2 & 3 (SELALU DIMASK) ===");
+        System.out.println("\n=== CASE 2: CLEARANCE LEBIH RENDAH (DIMASK) ===");
 
-        IntegrationGateway<PatientProfileV1> gatewayV1 =
+        IntegrationGateway<PatientProfileV1> gatewayLowV1 =
                 new IntegrationGateway<>(MockDatabase.getPatientV1());
 
         System.out.println(
-                gatewayV1.fetchData("P001", SecurityLevel.PUBLIC)
+                gatewayLowV1.fetchData("P001", SecurityLevel.PUBLIC)
         );
 
 
-        IntegrationGateway<PatientProfileV2> gatewayV2 =
+        IntegrationGateway<PatientProfileV2> gatewayLowV2 =
                 new IntegrationGateway<>(MockDatabase.getPatientV2());
 
         System.out.println(
-                gatewayV2.fetchData("P002", SecurityLevel.PUBLIC)
+                gatewayLowV2.fetchData("P002", SecurityLevel.PUBLIC)
         );
 
 
-        System.out.println("\n=== AKSES TINGGI (TETAP DIMASK SESUAI PERMINTAAN) ===");
+        System.out.println("\n=== CASE 3: CLEARANCE SAMA (TIDAK DIMASK) ===");
+
+        IntegrationGateway<PatientProfileV1> gatewayEqualV1 =
+                new IntegrationGateway<>(MockDatabase.getPatientV1());
+
+        System.out.println(
+                gatewayEqualV1.fetchData("P001", SecurityLevel.RESTRICTED)
+        );
+
+
+        System.out.println("\n=== CASE 4: CLEARANCE LEBIH TINGGI (TIDAK DIMASK) ===");
 
         IntegrationGateway<PatientProfileV1> gatewayHighV1 =
                 new IntegrationGateway<>(MockDatabase.getPatientV1());
 
-
         System.out.println(
-                gatewayHighV1.fetchData("P001", SecurityLevel.PUBLIC)
+                gatewayHighV1.fetchData("P001", SecurityLevel.SECRET)
         );
 
 
@@ -52,16 +61,23 @@ public class MainSimulation {
                 new IntegrationGateway<>(MockDatabase.getPatientV2());
 
         System.out.println(
-                gatewayHighV2.fetchData("P002", SecurityLevel.PUBLIC)
+                gatewayHighV2.fetchData("P002", SecurityLevel.SECRET)
         );
 
 
-        System.out.println("\n=== ERROR CASE ===");
+        System.out.println("\n=== CASE 5: ERROR CASE ===");
 
         IntegrationGateway<PatientProfileV1> gatewayError =
                 new IntegrationGateway<>(MockDatabase.getPatientV1());
 
-        System.out.println(gatewayError.fetchData("P999", SecurityLevel.SECRET));
-        System.out.println(gatewayError.fetchData("", SecurityLevel.SECRET));
+        // ID tidak ditemukan
+        System.out.println(
+                gatewayError.fetchData("P999", SecurityLevel.SECRET)
+        );
+
+        // ID kosong
+        System.out.println(
+                gatewayError.fetchData("", SecurityLevel.SECRET)
+        );
     }
 }
